@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Factory Experience — Pine Crest 2026 Innovation Institute</title>
+<meta name="description" content="A hands-on educator PD experience: design, fabricate, and assemble a retro Bluetooth speaker across six fabrication methods.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════ */
+:root {
+  --cream: #F5F0E8;
+  --warm-white: #FDFAF5;
+  --walnut: #3E2723;
+  --walnut-light: #5D4037;
+  --copper: #B87333;
+  --copper-light: #D4956B;
+  --copper-glow: rgba(184,115,51,0.12);
+  --sage: #7A8B6F;
+  --sage-light: #C2CEBC;
+  --charcoal: #2C2C2C;
+  --warm-gray: #9E9689;
+  --light-border: #E0D9CE;
+  --accent-red: #C85A3A;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+  --max-w: 960px;
+  --section-gap: 120px;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: rgba(184,115,51,0.25); }
+img { max-width: 100%; display: block; }
+a { color: var(--copper); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--walnut); }
+strong { font-weight: 600; color: var(--walnut); }
+
+/* ═══════════════════════════════════════
+   GRAIN OVERLAY (subtle texture)
+   ═══════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none; z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: linear-gradient(180deg, var(--walnut) 0%, #4A2E28 100%);
+  border-bottom: 3px solid var(--copper);
+  transition: box-shadow 0.3s;
+}
+.nav.scrolled { box-shadow: 0 4px 30px rgba(62,39,35,0.3); }
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--copper); font-weight: 500;
+  text-decoration: none; white-space: nowrap;
+}
+.nav-links { display: flex; gap: 2px; flex-wrap: nowrap; }
+.nav-links a {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(245,240,232,0.7);
+  text-decoration: none; padding: 8px 12px; border-radius: 4px;
+  transition: all 0.2s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--walnut); background: var(--copper);
+  font-weight: 500;
+}
+.nav-toggle {
+  display: none; background: none; border: none;
+  color: var(--copper); font-size: 22px; cursor: pointer; padding: 8px;
+}
+.nav-mobile {
+  display: none; background: var(--walnut);
+  padding: 8px 24px 20px; border-top: 1px solid rgba(184,115,51,0.2);
+}
+.nav-mobile.open { display: block; }
+.nav-mobile a {
+  display: block; font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 1.5px; text-transform: uppercase; color: rgba(245,240,232,0.7);
+  text-decoration: none; padding: 12px 0;
+  border-bottom: 1px solid rgba(184,115,51,0.08);
+}
+.nav-mobile a:hover { color: var(--copper); }
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+}
+
+/* ═══════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════ */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+section { padding: var(--section-gap) 0; }
+section:first-of-type { padding-top: 140px; }
+
+/* ═══════════════════════════════════════
+   SECTION HEADINGS
+   ═══════════════════════════════════════ */
+.section-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--copper); margin-bottom: 14px;
+  display: block;
+}
+.section-title {
+  font-family: var(--font-display); font-size: clamp(30px, 5vw, 48px);
+  font-weight: 700; color: var(--walnut); line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-subtitle {
+  font-size: 18px; color: var(--warm-gray); max-width: 620px;
+  line-height: 1.65; margin-bottom: 48px;
+}
+
+/* ═══════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════ */
+.hero {
+  text-align: center; padding: 160px 0 100px;
+  background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 60%, var(--cream) 100%);
+  position: relative;
+}
+.hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 30%, var(--copper-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-overline {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--copper); margin-bottom: 24px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display); font-size: clamp(42px, 7vw, 80px);
+  font-weight: 800; color: var(--walnut); line-height: 1.0;
+  margin-bottom: 24px; position: relative;
+}
+.hero h1 em {
+  font-style: italic; font-weight: 400; color: var(--copper);
+  display: block; font-size: 0.55em; margin-top: 8px;
+}
+.hero-desc {
+  font-size: 19px; color: var(--warm-gray); max-width: 640px;
+  margin: 0 auto 48px; line-height: 1.7; position: relative;
+}
+
+/* ═══════════════════════════════════════
+   IMAGE PLACEHOLDERS
+   ═══════════════════════════════════════ */
+.img-placeholder {
+  aspect-ratio: 16/9; border-radius: 10px;
+  background: linear-gradient(145deg, #EDE7DB 0%, var(--cream) 50%, #E0D9CE 100%);
+  border: 2px dashed var(--copper-light);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 32px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.img-placeholder::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 20px,
+    rgba(184,115,51,0.02) 20px, rgba(184,115,51,0.02) 40px
+  );
+}
+.img-placeholder .icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--copper-glow); display: flex;
+  align-items: center; justify-content: center;
+  margin-bottom: 14px; position: relative;
+}
+.img-placeholder .label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--copper); position: relative;
+  margin-bottom: 6px;
+}
+.img-placeholder .note {
+  font-family: var(--font-body); font-size: 13px; color: var(--warm-gray);
+  font-style: italic; max-width: 340px; position: relative; line-height: 1.5;
+}
+.img-placeholder.square { aspect-ratio: 1/1; }
+.img-placeholder.wide { aspect-ratio: 21/9; }
+.img-placeholder.fourthree { aspect-ratio: 4/3; }
+
+/* ═══════════════════════════════════════
+   CARDS & GRID
+   ═══════════════════════════════════════ */
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-bottom: 40px;
+}
+.card-grid.three { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card {
+  background: var(--warm-white); border-radius: 10px;
+  padding: 28px; border: 1px solid var(--light-border);
+  box-shadow: 0 2px 12px rgba(62,39,35,0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(62,39,35,0.07);
+}
+.card-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--copper-glow); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 16px;
+}
+.card h3 {
+  font-family: var(--font-display); font-size: 19px;
+  font-weight: 600; color: var(--walnut); margin-bottom: 12px;
+}
+.card p { margin-bottom: 10px; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ═══════════════════════════════════════
+   COMPONENT CHIPS
+   ═══════════════════════════════════════ */
+.chip-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px; margin-bottom: 48px;
+}
+.chip {
+  background: var(--warm-white); border-radius: 8px;
+  padding: 18px 16px; border: 1px solid var(--light-border);
+  transition: border-color 0.2s;
+}
+.chip:hover { border-color: var(--copper-light); }
+.chip-name {
+  font-family: var(--font-display); font-size: 15px;
+  font-weight: 600; color: var(--walnut); margin-bottom: 6px;
+}
+.chip-meta {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--warm-gray); line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════
+   TIMELINE (BUILD STAGES)
+   ═══════════════════════════════════════ */
+.timeline { position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 27px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--copper) 0%, rgba(184,115,51,0.15) 100%);
+}
+.timeline-item {
+  display: grid; grid-template-columns: 56px 1fr;
+  gap: 28px; margin-bottom: 56px; position: relative;
+}
+.timeline-badge {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--walnut); color: var(--copper);
+  font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; z-index: 1;
+  border: 2px solid var(--copper);
+  box-shadow: 0 0 0 6px var(--cream);
+}
+.timeline-content {
+  background: var(--warm-white); border-radius: 10px;
+  padding: 32px; border: 1px solid var(--light-border);
+}
+.timeline-content h3 {
+  font-family: var(--font-display); font-size: 22px;
+  font-weight: 700; color: var(--walnut); margin-bottom: 10px;
+}
+.timeline-content .tags { margin-bottom: 14px; }
+
+/* ═══════════════════════════════════════
+   TAGS
+   ═══════════════════════════════════════ */
+.tag {
+  display: inline-block; font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--copper); background: var(--copper-glow);
+  padding: 4px 10px; border-radius: 4px;
+  margin-right: 6px; margin-bottom: 6px;
+}
+
+/* ═══════════════════════════════════════
+   MACHINE PROFILES
+   ═══════════════════════════════════════ */
+.machine-card {
+  background: var(--warm-white); border-radius: 10px;
+  border: 1px solid var(--light-border); margin-bottom: 28px;
+  overflow: hidden;
+}
+.machine-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.machine-text { padding: 32px; }
+.machine-img { padding: 28px; display: flex; align-items: center; }
+.machine-type {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--copper); margin-bottom: 6px;
+}
+.machine-name {
+  font-family: var(--font-display); font-size: 26px;
+  font-weight: 700; color: var(--walnut); margin-bottom: 14px;
+}
+.machine-specs {
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--warm-gray); line-height: 1.9; margin: 14px 0;
+}
+.machine-classroom {
+  font-size: 14px; color: var(--charcoal); line-height: 1.7;
+  background: rgba(122,139,111,0.06); padding: 14px 18px;
+  border-radius: 8px; margin-top: 16px;
+}
+.machine-classroom strong { color: var(--sage); }
+
+@media (max-width: 700px) {
+  .machine-inner { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 1fr; }
+  .timeline::before { display: none; }
+  .timeline-badge { margin-bottom: -8px; }
+}
+
+/* ═══════════════════════════════════════
+   CALLOUT BOXES
+   ═══════════════════════════════════════ */
+.callout-warning {
+  background: rgba(200,90,58,0.05); border: 2px solid rgba(200,90,58,0.2);
+  border-radius: 10px; padding: 28px 32px; margin-bottom: 40px;
+}
+.callout-warning .callout-label {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  color: var(--accent-red); letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.supply-note {
+  background: var(--copper-glow); border: 1px solid rgba(184,115,51,0.2);
+  border-radius: 8px; padding: 16px 20px; margin-top: 24px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.supply-note .pin { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.supply-note p {
+  font-family: var(--font-mono); font-size: 12px;
+  color: #8B5E3C; line-height: 1.7; margin: 0;
+}
+
+/* ═══════════════════════════════════════
+   DARK PANEL
+   ═══════════════════════════════════════ */
+.dark-panel {
+  background: var(--walnut); border-radius: 14px;
+  padding: 48px 44px; margin-bottom: 48px; color: rgba(245,240,232,0.85);
+}
+.dark-panel h3 {
+  font-family: var(--font-display); font-size: 30px;
+  font-weight: 700; color: var(--copper); margin-bottom: 20px;
+}
+.dark-panel p { line-height: 1.8; }
+
+/* ═══════════════════════════════════════
+   NUMBERED LIST (Takeaways)
+   ═══════════════════════════════════════ */
+.numbered-steps {
+  background: var(--warm-white); border-radius: 10px;
+  border: 1px solid var(--light-border); padding: 36px; margin-bottom: 40px;
+}
+.numbered-steps p {
+  margin-bottom: 18px; padding-left: 4px;
+}
+.numbered-steps p:last-child { margin-bottom: 0; }
+
+/* ═══════════════════════════════════════
+   DIVIDER
+   ═══════════════════════════════════════ */
+.divider {
+  height: 1px; border: none; margin: 56px 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(184,115,51,0.25) 50%, transparent 100%);
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.footer {
+  text-align: center; padding: 64px 24px 80px;
+  background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 100%);
+}
+.footer .overline {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--copper); margin-bottom: 12px;
+}
+.footer h2 {
+  font-family: var(--font-display); font-size: 26px;
+  color: var(--walnut); font-weight: 700; margin-bottom: 10px;
+}
+.footer p { color: var(--warm-gray); font-size: 16px; }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL ANIMATIONS
+   ═══════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE TWEAKS
+   ═══════════════════════════════════════ */
+@media (max-width: 640px) {
+  :root { --section-gap: 80px; }
+  .card-grid, .card-grid.three, .chip-grid { grid-template-columns: 1fr; }
+  .hero { padding: 130px 0 70px; }
+  .dark-panel { padding: 32px 24px; }
+  .numbered-steps { padding: 24px; }
+  section:first-of-type { padding-top: 120px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVIGATION ═══════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">Factory Experience</a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#build">The Build</a>
+      <a href="#software">Software</a>
+      <a href="#equipment">Equipment</a>
+      <a href="#safety">Safety</a>
+      <a href="#educators">Educators</a>
+      <a href="#takeaways">Takeaways</a>
+    </div>
+    <button class="nav-toggle" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">☰</button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="#overview" onclick="closeMobile()">Overview</a>
+    <a href="#build" onclick="closeMobile()">The Build</a>
+    <a href="#software" onclick="closeMobile()">Software</a>
+    <a href="#equipment" onclick="closeMobile()">Equipment</a>
+    <a href="#safety" onclick="closeMobile()">Safety</a>
+    <a href="#educators" onclick="closeMobile()">Educators</a>
+    <a href="#takeaways" onclick="closeMobile()">Takeaways</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-overline reveal">Pine Crest School · 2026 Innovation Institute</div>
+    <h1 class="reveal">The Factory<br>Experience<em>Concept to Production, Hands On</em></h1>
+    <p class="hero-desc reveal">A hands-on professional development experience in which educators design, fabricate and assemble a desktop Bluetooth speaker — learning the full concept-to-production process across multiple tools, machines and skills.</p>
+    <div class="reveal">
+      <div class="img-placeholder wide">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        <div class="label">Hero — Finished Speaker</div>
+        <div class="note">Photograph of the completed retro 1950s-style Bluetooth speaker. Warm wood surface, soft directional lighting. Show the speaker grille, dial, metal lettering and sticker.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<section id="overview">
+  <div class="container">
+    <span class="section-label reveal">Section 01</span>
+    <h2 class="section-title reveal">What You're Building &amp; Why</h2>
+    <p class="section-subtitle reveal">One product, six fabrication methods, three design applications — built by educators, for educators.</p>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-icon">🏭</div>
+        <h3>What Is a Factory Experience?</h3>
+        <p>Inspired by the Autodesk University Factory Experience — an annual event where professionals walk a mini factory floor to build a consumer product from concept to completion — this session adapts that model for K–12 educator professional development.</p>
+        <p>Instead of injection molding and CNC at industrial scale, we use the tools actually found in school makerspaces: 3D printers, laser cutters, vinyl cutters, metal fabrication machines and industry-standard design software.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📻</div>
+        <h3>Why a Bluetooth Speaker?</h3>
+        <p>The retro AM radio aesthetic isn't just charming — it creates a product complex enough to require <strong>six distinct fabrication processes</strong> and <strong>three different design applications</strong>, yet simple enough to assemble in a PD session.</p>
+        <p>Every component teaches a different skill set. Together, they demonstrate how real products require the convergence of multiple disciplines — exactly the kind of integrated thinking STEM education should foster.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎓</div>
+        <h3>Who Is This For?</h3>
+        <p>This experience is designed for <strong>educators attending the 2026 Pine Crest Innovation Institute</strong> — teachers, instructional coaches and administrators interested in bringing maker-centered learning into their schools.</p>
+        <p>The goal is not just to build a speaker. It is to experience the full design-fabrication-assembly pipeline so you can envision how to teach it.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h2 class="section-title reveal">What Goes Into the Build</h2>
+    <p class="section-subtitle reveal">Seven components, six fabrication methods, three design tools — one finished product.</p>
+
+    <div class="chip-grid reveal">
+      <div class="chip">
+        <div class="chip-name">Frame</div>
+        <div class="chip-meta">3D Printed (PLA)<br>Machine: Prusa MK4s<br>Software: Fusion</div>
+      </div>
+      <div class="chip">
+        <div class="chip-name">Faceplate</div>
+        <div class="chip-meta">Laser Cut (1/8" wood)<br>Machine: Epilog Fusion Pro<br>Software: Illustrator</div>
+      </div>
+      <div class="chip">
+        <div class="chip-name">Dial</div>
+        <div class="chip-meta">Laser Engraved + Cut (1/8" acrylic)<br>Machine: Epilog Fusion Pro<br>Software: Illustrator</div>
+      </div>
+      <div class="chip">
+        <div class="chip-name">Sticker</div>
+        <div class="chip-meta">Vinyl Cut<br>Machine: Cricut Maker 3<br>Software: Illustrator</div>
+      </div>
+      <div class="chip">
+        <div class="chip-name">"Pine Crest" Lettering</div>
+        <div class="chip-meta">Metal Cut (1mm SS)<br>Machine: xTool Metal Fab<br>Software: Illustrator</div>
+      </div>
+      <div class="chip">
+        <div class="chip-name">Electronics</div>
+        <div class="chip-meta">CT14 Micro 4.2 Stereo<br>Bluetooth Amp (5V, 5W+5W)<br>USB-C charging</div>
+      </div>
+      <div class="chip">
+        <div class="chip-name">Decorative Button</div>
+        <div class="chip-meta">Installed on acrylic dial<br>Aesthetic only — not wired</div>
+      </div>
+    </div>
+
+    <div class="supply-note reveal">
+      <span class="pin">📌</span>
+      <p><strong>Content you'll need to supply:</strong> Hero photo of the finished speaker. Optional: group photo from a prototype session, a short video clip of the assembly process, Pine Crest Innovation Institute logo/branding assets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE BUILD ═══════════════ -->
+<section id="build" style="background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 40%, var(--cream) 100%);">
+  <div class="container">
+    <span class="section-label reveal">Section 02</span>
+    <h2 class="section-title reveal">The Build</h2>
+    <p class="section-subtitle reveal">From screen to shop floor — every stage of design, fabrication and assembly in the order it happens.</p>
+
+    <div class="timeline">
+      <!-- Stage 01 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-badge">01</div>
+        <div class="timeline-content">
+          <h3>Design — Enclosure (Fusion)</h3>
+          <div class="tags">
+            <span class="tag">CAD</span><span class="tag">Parametric Design</span><span class="tag">3D Modeling</span>
+          </div>
+          <p>The speaker frame is modeled parametrically in Autodesk Fusion. This stage covers sketch constraints, extrusions, fillets and preparing the model for 3D printing — including wall thickness, tolerances for component fit and orientation for print success.</p>
+          <div class="img-placeholder fourthree" style="margin-top:20px">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Stage 01 — Fusion Model</div>
+            <div class="note">Fusion screenshot: isometric view of speaker enclosure with visible sketch geometry or timeline.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 02 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-badge">02</div>
+        <div class="timeline-content">
+          <h3>Design — Faceplate, Dial, Sticker &amp; Lettering (Illustrator)</h3>
+          <div class="tags">
+            <span class="tag">Vector Design</span><span class="tag">File Prep</span><span class="tag">Multi-output</span>
+          </div>
+          <p>All 2D components are designed in Adobe Illustrator. The wood faceplate layout (speaker grille pattern, dial cutout), the acrylic dial with engraved markings, the vinyl sticker and the "Pine Crest" vector logo for metal cutting. Each output targets a different machine and material, so stroke weights, color modes and file export settings differ.</p>
+          <div class="img-placeholder fourthree" style="margin-top:20px">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Stage 02 — Illustrator Artboards</div>
+            <div class="note">Illustrator screenshot showing vector designs for faceplate, dial and logo with visible layers panel and cut/engrave color coding.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 03 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-badge">03</div>
+        <div class="timeline-content">
+          <h3>3D Printing the Frame</h3>
+          <div class="tags">
+            <span class="tag">FDM Printing</span><span class="tag">PLA</span><span class="tag">Prusa MK4s</span>
+          </div>
+          <p>The enclosure prints in PLA on a Prusa MK4s. Key decisions: layer height (0.2mm for speed vs. 0.15mm for finish), infill percentage (15–20% balances strength and material), support structures for overhangs and print orientation to minimize visible layer lines on the front face.</p>
+          <div class="img-placeholder" style="margin-top:20px">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Stage 03 — 3D Printing</div>
+            <div class="note">Photo of the frame printing on the Prusa MK4s, or a finished frame still on the print bed.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 04 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-badge">04</div>
+        <div class="timeline-content">
+          <h3>Laser Cutting &amp; Engraving</h3>
+          <div class="tags">
+            <span class="tag">Laser Cutting</span><span class="tag">Engraving</span><span class="tag">Wood</span><span class="tag">Acrylic</span>
+          </div>
+          <p>The Epilog Fusion Pro handles two components: the 1/8" wood faceplate (cut and optionally engraved with a speaker grille pattern) and the 1/8" acrylic dial (cut to shape with engraved radio-frequency markings). Power, speed and frequency settings differ between wood and acrylic. Kerf compensation matters for fit.</p>
+          <div class="img-placeholder" style="margin-top:20px">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Stage 04 — Laser Cutting</div>
+            <div class="note">Photo of the Epilog running a cut, or the faceplate and dial freshly cut on the laser bed.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 05 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-badge">05</div>
+        <div class="timeline-content">
+          <h3>Vinyl Cutting the Sticker</h3>
+          <div class="tags">
+            <span class="tag">Vinyl Cutting</span><span class="tag">Cricut</span><span class="tag">SVG</span>
+          </div>
+          <p>A decorative sticker is cut on the Cricut Maker 3 from adhesive vinyl. Illustrator vectors are exported as SVG, imported into Cricut Design Space, and cut. Weeding removes excess material before transfer tape application.</p>
+          <div class="img-placeholder" style="margin-top:20px">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Stage 05 — Vinyl Cutting</div>
+            <div class="note">Photo of the sticker being weeded, or the finished sticker applied to the speaker.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 06 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-badge">06</div>
+        <div class="timeline-content">
+          <h3>Metal Cutting the Lettering</h3>
+          <div class="tags">
+            <span class="tag">Metal Fab</span><span class="tag">Stainless Steel</span><span class="tag">xTool</span>
+          </div>
+          <p>The "Pine Crest" logo lettering is cut from 1mm stainless steel sheet on an xTool Metal Fab. This is the most specialized fabrication step and introduces educators to a technology most school makerspaces don't yet have. Small text and fine detail require careful file prep.</p>
+          <div class="img-placeholder" style="margin-top:20px">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Stage 06 — Metal Cutting</div>
+            <div class="note">Close-up of the stainless steel lettering on the machine bed or being installed on the speaker.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 07 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-badge">07</div>
+        <div class="timeline-content">
+          <h3>Assembly</h3>
+          <div class="tags">
+            <span class="tag">Assembly</span><span class="tag">Electronics</span><span class="tag">Final Product</span>
+          </div>
+          <p>All components come together: electronics board mounted inside the 3D-printed frame, faceplate attached to the front, dial installed with the decorative button at center, metal lettering adhered, sticker applied. Bluetooth pairing is tested. The finished speaker is a functional, take-home product.</p>
+          <div class="img-placeholder" style="margin-top:20px">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Stage 07 — Assembly</div>
+            <div class="note">Photo sequence or exploded-view showing all components laid out before assembly, or hands assembling the speaker.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="supply-note reveal">
+      <span class="pin">📌</span>
+      <p><strong>Content needed:</strong> One or more photographs per stage. Fusion screenshots, Illustrator artboard screenshots, in-process fabrication photos, parts on machine beds and final assembly shots. An exploded-view photo showing all components laid out is especially effective for the final stage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SOFTWARE ═══════════════ -->
+<section id="software">
+  <div class="container">
+    <span class="section-label reveal">Section 03</span>
+    <h2 class="section-title reveal">Software &amp; Design</h2>
+    <p class="section-subtitle reveal">Two applications handle every design task in this build — but they serve fundamentally different purposes.</p>
+
+    <div class="card-grid reveal">
+      <!-- Fusion -->
+      <div class="card" style="padding:36px">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:8px">3D Parametric CAD</div>
+        <h3 style="font-size:26px;margin-bottom:16px">Autodesk Fusion</h3>
+        <p>Fusion handles the speaker's 3D-printed enclosure. This is parametric modeling — dimensions are driven by constraints and relationships, so changes propagate automatically. Students learning Fusion gain exposure to the same workflow used in product design and mechanical engineering.</p>
+        <p><strong>Key skills introduced:</strong> Sketch constraints, extrude/revolve, fillet/chamfer, component assembly, STL export, design for additive manufacturing.</p>
+        <div class="img-placeholder fourthree" style="margin-top:20px">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          <div class="label">Fusion Screenshot</div>
+          <div class="note">Parametric model of the speaker enclosure — show timeline, sketch geometry or section analysis.</div>
+        </div>
+        <div class="supply-note" style="margin-top:16px">
+          <span class="pin">📌</span>
+          <p>Free for educators via Autodesk Education plan. Runs on Mac/Windows. Chromebook access via browser is limited.</p>
+        </div>
+      </div>
+
+      <!-- Illustrator -->
+      <div class="card" style="padding:36px">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent-red);margin-bottom:8px">2D Vector Design</div>
+        <h3 style="font-size:26px;margin-bottom:16px">Adobe Illustrator</h3>
+        <p>Illustrator drives four separate outputs: the laser-cut wood faceplate, the laser-engraved acrylic dial, the Cricut-cut vinyl sticker, and the metal-cut "Pine Crest" lettering. Each requires different file-prep considerations — stroke colors for cut vs. engrave, SVG export for Cricut and DXF for the xTool.</p>
+        <p><strong>Key skills introduced:</strong> Vector vs. raster, pen tool, stroke/fill for machine output, artboard management, SVG/DXF/PDF export, kerf compensation.</p>
+        <div class="img-placeholder fourthree" style="margin-top:20px">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          <div class="label">Illustrator Screenshot</div>
+          <div class="note">Illustrator workspace showing the faceplate, dial and logo vectors with layers panel and cut/engrave color coding.</div>
+        </div>
+        <div class="supply-note" style="margin-top:16px">
+          <span class="pin">📌</span>
+          <p>Available via Adobe Creative Cloud for Education. For schools without Adobe, Inkscape can produce similar outputs, though the workflow differs.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h2 class="section-title reveal">For Educators: Design Software in the Classroom</h2>
+
+    <div class="card-grid three reveal">
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <h3>Fusion vs. Tinkercad</h3>
+        <p>Many schools start with Tinkercad. Fusion is the logical next step — but the learning curve is real. Consider Tinkercad for grades 6–8, Fusion for grades 9–12. The parametric workflow in Fusion teaches design thinking that Tinkercad's block-based approach doesn't.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📂</div>
+        <h3>One File, Many Machines</h3>
+        <p>A powerful takeaway: a single Illustrator file can drive a laser cutter, vinyl cutter and metal cutter. The skill isn't learning four machines — it's learning to prepare one design for multiple outputs. That's transferable.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔑</div>
+        <h3>Licensing &amp; Access</h3>
+        <p>Both Fusion and Illustrator are available free or at steep discounts for educational institutions. Fusion is completely free for educators. Adobe offers institutional licensing. Document your access plan before committing to a curriculum.</p>
+      </div>
+    </div>
+
+    <div class="supply-note reveal">
+      <span class="pin">📌</span>
+      <p><strong>Content needed:</strong> Screenshots of your actual Fusion and Illustrator project files. Annotated screenshots showing cut vs. engrave color coding would be especially useful. Screen recordings of the design process can be linked here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EQUIPMENT ═══════════════ -->
+<section id="equipment" style="background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 40%, var(--cream) 100%);">
+  <div class="container">
+    <span class="section-label reveal">Section 04</span>
+    <h2 class="section-title reveal">Equipment &amp; Machines</h2>
+    <p class="section-subtitle reveal">Four machines, four fabrication methods. Each serves a different role in the build — and a different niche in a school makerspace.</p>
+
+    <!-- Prusa -->
+    <div class="machine-card reveal">
+      <div class="machine-inner">
+        <div class="machine-text">
+          <div class="machine-type">FDM 3D Printer</div>
+          <div class="machine-name">Prusa MK4s</div>
+          <p><strong>Role in this build:</strong> Prints the speaker frame/enclosure in PLA.</p>
+          <div class="machine-specs">Build volume: 250 × 210 × 220 mm · Nozzle: 0.4mm<br>Layer height: 0.05–0.3mm · Input-shaper enabled<br>Approx. price: ~$800</div>
+          <div class="machine-classroom"><strong>Classroom notes:</strong> Excellent classroom machine. Reliable, well-documented, strong community. Auto bed leveling and input shaper reduce failed prints. PLA is low-odor and safe in ventilated rooms.</div>
+        </div>
+        <div class="machine-img">
+          <div class="img-placeholder fourthree" style="width:100%">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Prusa MK4s</div>
+            <div class="note">Photo with a print in progress or the speaker frame on the bed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Epilog -->
+    <div class="machine-card reveal">
+      <div class="machine-inner">
+        <div class="machine-text">
+          <div class="machine-type">CO₂ Laser Cutter / Engraver</div>
+          <div class="machine-name">Epilog Fusion Pro</div>
+          <p><strong>Role in this build:</strong> Cuts the wood faceplate and acrylic dial; engraves dial markings.</p>
+          <div class="machine-specs">Bed: up to 48" × 36" (model dependent) · CO₂: 50–120W<br>Resolution: up to 1200 dpi<br>Approx. price: $20,000–$60,000+</div>
+          <div class="machine-classroom"><strong>Classroom notes:</strong> Professional-grade. Requires dedicated ventilation/exhaust, staff training and strict supervision. Not a casual purchase — but if your school has one, it's the most versatile tool in the shop.</div>
+        </div>
+        <div class="machine-img">
+          <div class="img-placeholder fourthree" style="width:100%">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Epilog Fusion Pro</div>
+            <div class="note">Photo of the Epilog cutting or engraving the wood faceplate or acrylic dial.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cricut -->
+    <div class="machine-card reveal">
+      <div class="machine-inner">
+        <div class="machine-text">
+          <div class="machine-type">Vinyl / Paper Cutter</div>
+          <div class="machine-name">Cricut Maker 3</div>
+          <p><strong>Role in this build:</strong> Cuts the adhesive vinyl decorative sticker.</p>
+          <div class="machine-specs">Max cut width: 11.7" (Smart Materials up to 12 ft)<br>Blade force: up to 4 kg · Cuts 300+ materials<br>Approx. price: ~$300–$400</div>
+          <div class="machine-classroom"><strong>Classroom notes:</strong> Very accessible. Low risk, no ventilation needed, quiet. Good K–12. Cricut Design Space is browser-based. Limitation: proprietary materials can increase cost.</div>
+        </div>
+        <div class="machine-img">
+          <div class="img-placeholder fourthree" style="width:100%">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">Cricut Maker 3</div>
+            <div class="note">Photo of the Cricut, or the vinyl sticker being weeded.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- xTool -->
+    <div class="machine-card reveal">
+      <div class="machine-inner">
+        <div class="machine-text">
+          <div class="machine-type">Metal Cutting System</div>
+          <div class="machine-name">xTool Metal Fab</div>
+          <p><strong>Role in this build:</strong> Cuts "Pine Crest" lettering from 1mm stainless steel.</p>
+          <div class="machine-specs">Cuts thin metals: stainless steel, aluminum<br>Integrated fume extraction<br>Approx. price: Contact manufacturer</div>
+          <div class="machine-classroom"><strong>Classroom notes:</strong> Newest and most specialized machine in this build. Likely not in most school shops yet. Demonstrates where makerspace technology is headed and gives educators a preview of what's possible.</div>
+        </div>
+        <div class="machine-img">
+          <div class="img-placeholder fourthree" style="width:100%">
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="label">xTool Metal Fab</div>
+            <div class="note">Photo of the xTool in operation or close-up of the metal lettering output.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="supply-note reveal">
+      <span class="pin">📌</span>
+      <p><strong>Content needed:</strong> Photos of each machine in your setup — ideally in-process. Machine settings screenshots (PrusaSlicer, Epilog dashboard, Cricut Design Space, xTool Creative Space) add practical value for replication.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SAFETY ═══════════════ -->
+<section id="safety">
+  <div class="container">
+    <span class="section-label reveal">Section 05</span>
+    <h2 class="section-title reveal">Safety Considerations</h2>
+    <p class="section-subtitle reveal">Every machine in this build carries specific risks. Here's what educators need to know before running any of these processes.</p>
+
+    <div class="callout-warning reveal">
+      <div class="callout-label">⚠️ General Principle</div>
+      <p>No one should operate any equipment without proper training specific to that machine. Manufacturer training materials, institutional safety protocols and local regulations always take precedence over the general guidance on this page. This is an overview, not a substitute for formal training.</p>
+    </div>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-icon">🖨️</div>
+        <h3>3D Printing (Prusa MK4s)</h3>
+        <p><strong>Primary risks:</strong> Hot nozzle (200 °C+), heated bed (60 °C+), minor pinch points on moving axes.</p>
+        <p><strong>Material safety:</strong> PLA produces low-level particulate emissions. Ventilation recommended, especially for prolonged printing. Not acutely toxic, but err toward caution.</p>
+        <p><strong>PPE:</strong> None for normal operation. Heat-resistant gloves if handling bed immediately after printing.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Laser Cutting (Epilog Fusion Pro)</h3>
+        <p><strong>Primary risks:</strong> Class 4 laser — direct or reflected beam causes permanent eye damage and burns. Fire risk from combustible materials.</p>
+        <p><strong>Ventilation:</strong> Mandatory fume extraction. Never cut PVC, polycarbonate or materials containing chlorine.</p>
+        <p><strong>PPE:</strong> Laser safety glasses rated for the machine's wavelength. Never operate with the lid open or interlocks bypassed.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✂️</div>
+        <h3>Vinyl Cutting (Cricut Maker 3)</h3>
+        <p><strong>Primary risks:</strong> Minimal. The blade is small but sharp — use the blade housing tool to change blades, not fingers.</p>
+        <p><strong>Material safety:</strong> Adhesive vinyl is non-toxic. Transfer tape and weeding tools are low-risk. This is the safest station in the build.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔩</div>
+        <h3>Metal Cutting (xTool Metal Fab)</h3>
+        <p><strong>Primary risks:</strong> Sharp metal edges on cut parts. Potential for metal particulates. Noise.</p>
+        <p><strong>Material safety:</strong> Stainless steel is inert, but cut edges can be razor-sharp. Deburring is required after cutting.</p>
+        <p><strong>PPE:</strong> Cut-resistant gloves for raw output. Safety glasses. Follow manufacturer's fume extraction guidance.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h2 class="section-title reveal">Safety in the Classroom Context</h2>
+
+    <div class="card-grid three reveal">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Before You Bring It to School</h3>
+        <p>Check your school's and district's policies on makerspace equipment. Many districts require formal risk assessments, parent permission forms and documented training logs. Some insurance carriers have specific exclusions. Do the paperwork first.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👥</div>
+        <h3>Supervision Ratios</h3>
+        <p>Laser cutters and metal fabrication should never be operated by students without direct adult supervision — typically 1:1 at the machine. 3D printers and Cricut machines can operate with broader ratios once students are trained.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚨</div>
+        <h3>Emergency Preparedness</h3>
+        <p>Fire extinguisher rated for materials in use (Class B for plastics). First aid kit with burn supplies. Emergency stop procedures posted at each machine. Know your school's emergency protocols.</p>
+      </div>
+    </div>
+
+    <div class="supply-note reveal">
+      <span class="pin">📌</span>
+      <p><strong>Content needed:</strong> Your specific safety protocols and institutional requirements. Custom safety signage or checklists. Photos of your safety setup (fire extinguisher placement, ventilation, PPE station). Pine Crest maker safety training documentation links.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOR EDUCATORS ═══════════════ -->
+<section id="educators" style="background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 40%, var(--cream) 100%);">
+  <div class="container">
+    <span class="section-label reveal">Section 06</span>
+    <h2 class="section-title reveal">For Educators</h2>
+    <p class="section-subtitle reveal">How to think about bringing integrated fabrication experiences into your own classroom or makerspace.</p>
+
+    <div class="card reveal" style="margin-bottom:40px;padding:36px">
+      <div class="card-icon">🧩</div>
+      <h3>This Is Not a Lesson Plan — It's a Design Pattern</h3>
+      <p>The Factory Experience demonstrates a <em>structure</em> for project-based STEM learning: start with a finished product, decompose it into components that each require different skills and tools, then guide learners through the full pipeline from design to assembly.</p>
+      <p>You don't need this exact product. You don't need these exact machines. The transferable idea is: <strong>convergence of multiple disciplines into a single tangible outcome.</strong></p>
+    </div>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-icon">📐</div>
+        <h3>Scaffolding for Students</h3>
+        <p><strong>Middle school:</strong> Simplify to 2–3 fabrication methods. Use Tinkercad instead of Fusion. Pre-cut complex components; let students assemble and customize.</p>
+        <p><strong>High school intro:</strong> Students design one component (e.g., the faceplate) and receive the rest pre-made. Gradually expand ownership.</p>
+        <p><strong>Advanced HS / post-secondary:</strong> Students own the full pipeline — design all components, troubleshoot fabrication, iterate on fit.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏱️</div>
+        <h3>Time Estimates</h3>
+        <p><strong>As a PD session:</strong> 2–3 hours with pre-fabricated components + guided assembly.</p>
+        <p><strong>As a classroom unit:</strong> 3–5 weeks depending on student ownership. Fusion modeling alone can take 5–8 class periods for beginners.</p>
+        <p><strong>Print time per frame:</strong> 4–8 hours depending on settings. Plan for overnight prints or batch scheduling.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h3>Cost Per Unit</h3>
+        <p style="font-family:var(--font-mono);font-size:13px;line-height:2;color:var(--walnut)">
+          PLA filament (frame): ~$1–2<br>
+          Wood sheet (faceplate): ~$0.50<br>
+          Acrylic sheet (dial): ~$0.50<br>
+          CT14 Bluetooth amp + cable: ~$8–15<br>
+          Stainless steel (lettering): ~$1–3<br>
+          Vinyl sticker material: ~$0.25<br>
+          Decorative button: ~$0.50–2
+        </p>
+        <p><strong>Estimated total: ~$12–24 per unit</strong></p>
+        <div class="supply-note"><span class="pin">📌</span><p>Rough estimates. Supply your verified costs and vendor links.</p></div>
+      </div>
+    </div>
+
+    <div class="card-grid three reveal" style="margin-top:24px">
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <h3>Curriculum Connections</h3>
+        <p><strong>Engineering / CTE:</strong> Design process, CAD, manufacturing methods, tolerances</p>
+        <p><strong>Art / Design:</strong> Graphic design, typography, visual composition</p>
+        <p><strong>Physics:</strong> Acoustics, amplifier circuits, Bluetooth</p>
+        <p><strong>CS:</strong> File formats, digital-to-physical pipeline, parametric logic</p>
+        <p><strong>Math:</strong> Measurement, tolerances, kerf compensation, geometric constraints</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📈</div>
+        <h3>Scaling Strategies</h3>
+        <p><strong>One printer, 30 students:</strong> Stagger prints over weeks. Assign teams to different stages simultaneously.</p>
+        <p><strong>No metal cutter:</strong> Substitute laser-engraved or 3D-printed lettering. Design file prep stays the same.</p>
+        <p><strong>No laser cutter:</strong> CNC-routed wood or hand-cut alternatives. Trade-off is precision and time.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <h3>Assessment Ideas</h3>
+        <p>Process portfolios documenting each design iteration and fabrication step.</p>
+        <p>Design review presentations where students justify material choices, dimensions, tolerances.</p>
+        <p>Functional testing: Does it pair? Does the sound quality meet a rubric? Does it assemble without forcing?</p>
+      </div>
+    </div>
+
+    <div class="supply-note reveal">
+      <span class="pin">📌</span>
+      <p><strong>Content needed:</strong> Specific lesson sequences. Verified cost breakdown with vendor links. Standards alignment (NGSS, ISTE, state CTE frameworks). Student work samples if piloted. Session schedule for the Innovation Institute PD event.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TAKEAWAYS ═══════════════ -->
+<section id="takeaways">
+  <div class="container">
+    <span class="section-label reveal">Section 07</span>
+    <h2 class="section-title reveal">Lessons &amp; Takeaways</h2>
+    <p class="section-subtitle reveal">What the Factory Experience is meant to leave you with — beyond the speaker itself.</p>
+
+    <div class="dark-panel reveal">
+      <h3>The Big Idea</h3>
+      <p>No single tool, skill or discipline produces a finished product. Real manufacturing — like real learning — requires the integration of multiple knowledge domains, iterative problem-solving and collaboration across specialties. The Factory Experience compresses that reality into something you can hold in your hands.</p>
+    </div>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-icon">🔀</div>
+        <h3>Integration Over Isolation</h3>
+        <p>Schools tend to teach tools in isolation: a 3D printing unit here, a laser cutting project there. This build demonstrates what happens when you require them to work together. Tolerances between the 3D-printed frame and laser-cut faceplate force designers to think across processes. That's the real lesson.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Failure Is Part of Fabrication</h3>
+        <p>Prototyping this speaker involved failed prints, misaligned cuts, kerf errors and parts that didn't fit. The finished product you see is the result of iteration. Show your students the failures. They're more instructive than the final version.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚪</div>
+        <h3>Access Is Not Binary</h3>
+        <p>You don't need a $50,000 laser cutter to teach the principles behind this build. You need the design thinking. A student who can prepare an Illustrator file for laser cutting has a transferable skill — even if your school sends the file to a service bureau.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Start With the Product</h3>
+        <p>Don't start with "let's learn Fusion" or "let's learn the laser cutter." Start with "let's build this thing" — then let the tools serve the outcome. Students engage differently when the learning has a tangible destination.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h2 class="section-title reveal">What to Bring Back to Your School</h2>
+
+    <div class="numbered-steps reveal">
+      <p><strong>1. Audit your tools.</strong> You don't need all four machines. What do you have? What can those machines make together?</p>
+      <p><strong>2. Pick a product.</strong> Choose something your students will want to keep. A phone stand, a desk organizer, a lamp, a clock. Reverse-engineer it into components that use your available tools.</p>
+      <p><strong>3. Design the convergence.</strong> The magic isn't the individual tools — it's the moment when parts made by different processes come together and either fit or don't. Design your project to require that moment.</p>
+      <p><strong>4. Document everything.</strong> Photograph prototypes, failures and final products. Build your own version of this website. Share it with colleagues. That's how maker culture scales.</p>
+      <p><strong>5. Connect with your community.</strong> The Innovation Institute is a starting point. Reach out to other maker educators, join Autodesk's education community, attend regional fab lab meetups. You don't have to figure this out alone.</p>
+    </div>
+
+    <div class="supply-note reveal">
+      <span class="pin">📌</span>
+      <p><strong>Content needed:</strong> Your personal reflections and lessons learned. Photos of prototypes and failed iterations (gold for this page). Links to resources, communities and further reading. Follow-up contact info. QR code or link for post-session feedback survey.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="footer">
+  <div class="overline">Pine Crest School</div>
+  <h2>2026 Innovation Institute</h2>
+  <p>Thank you for building with us.</p>
+</div>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav shadow on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 100;
+    if (window.scrollY >= top) current = section.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+// Mobile menu close
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+</script>
+</body>
+</html>
