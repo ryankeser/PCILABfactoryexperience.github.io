@@ -7,27 +7,28 @@
 <meta name="description" content="A hands-on educator PD experience: design, fabricate, and assemble a retro Bluetooth speaker across six fabrication methods.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════
    DESIGN TOKENS
    ═══════════════════════════════════════ */
 :root {
-  --cream: #F5F0E8;
-  --warm-white: #FDFAF5;
-  --walnut: #3E2723;
-  --walnut-light: #5D4037;
-  --copper: #B87333;
-  --copper-light: #D4956B;
-  --copper-glow: rgba(184,115,51,0.12);
-  --sage: #7A8B6F;
-  --sage-light: #C2CEBC;
-  --charcoal: #2C2C2C;
-  --warm-gray: #9E9689;
-  --light-border: #E0D9CE;
-  --accent-red: #C85A3A;
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body: 'Source Serif 4', Georgia, serif;
+  --cream: #F4F7F2;
+  --warm-white: #FAFCF9;
+  --walnut: #004712;
+  --walnut-light: #1A5C2A;
+  --copper: #004712;
+  --copper-light: #336A3B;
+  --copper-glow: rgba(0,71,18,0.10);
+  --sage: #40E269;
+  --sage-light: #A8E4B8;
+  --charcoal: #1E1E1E;
+  --warm-gray: #6B7D6F;
+  --light-border: #D4DED6;
+  --accent-red: #40E269;
+  --gray-mid: #B1B1B1;
+  --font-display: 'EB Garamond', 'Adobe Garamond Pro', Garamond, 'Times New Roman', serif;
+  --font-body: 'Proxima Nova', 'Nunito Sans', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'DM Mono', 'Courier New', monospace;
   --max-w: 960px;
   --section-gap: 120px;
@@ -47,7 +48,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-::selection { background: rgba(184,115,51,0.25); }
+::selection { background: rgba(0,71,18,0.2); }
 img { max-width: 100%; display: block; }
 a { color: var(--copper); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--walnut); }
@@ -69,11 +70,11 @@ body::after {
    ═══════════════════════════════════════ */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: linear-gradient(180deg, var(--walnut) 0%, #4A2E28 100%);
-  border-bottom: 3px solid var(--copper);
+  background: linear-gradient(180deg, var(--walnut) 0%, #0A5A1F 100%);
+  border-bottom: 3px solid #40E269;
   transition: box-shadow 0.3s;
 }
-.nav.scrolled { box-shadow: 0 4px 30px rgba(62,39,35,0.3); }
+.nav.scrolled { box-shadow: 0 4px 30px rgba(0,71,18,0.3); }
 .nav-inner {
   max-width: 1100px; margin: 0 auto; padding: 0 24px;
   display: flex; align-items: center; justify-content: space-between;
@@ -92,7 +93,7 @@ body::after {
   transition: all 0.2s; white-space: nowrap;
 }
 .nav-links a:hover, .nav-links a.active {
-  color: var(--walnut); background: var(--copper);
+  color: #004712; background: #40E269;
   font-weight: 500;
 }
 .nav-toggle {
@@ -101,14 +102,14 @@ body::after {
 }
 .nav-mobile {
   display: none; background: var(--walnut);
-  padding: 8px 24px 20px; border-top: 1px solid rgba(184,115,51,0.2);
+  padding: 8px 24px 20px; border-top: 1px solid rgba(64,226,105,0.2);
 }
 .nav-mobile.open { display: block; }
 .nav-mobile a {
   display: block; font-family: var(--font-mono); font-size: 12px;
   letter-spacing: 1.5px; text-transform: uppercase; color: rgba(245,240,232,0.7);
   text-decoration: none; padding: 12px 0;
-  border-bottom: 1px solid rgba(184,115,51,0.08);
+  border-bottom: 1px solid rgba(64,226,105,0.08);
 }
 .nav-mobile a:hover { color: var(--copper); }
 
@@ -147,7 +148,7 @@ section:first-of-type { padding-top: 140px; }
    ═══════════════════════════════════════ */
 .hero {
   text-align: center; padding: 160px 0 100px;
-  background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 60%, var(--cream) 100%);
+  background: linear-gradient(180deg, var(--cream) 0%, #E8F0E6 60%, var(--cream) 100%);
   position: relative;
 }
 .hero::before {
@@ -179,7 +180,7 @@ section:first-of-type { padding-top: 140px; }
    ═══════════════════════════════════════ */
 .img-placeholder {
   aspect-ratio: 16/9; border-radius: 10px;
-  background: linear-gradient(145deg, #EDE7DB 0%, var(--cream) 50%, #E0D9CE 100%);
+  background: linear-gradient(145deg, #E8F0E6 0%, var(--cream) 50%, #D4DED6 100%);
   border: 2px dashed var(--copper-light);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
@@ -190,7 +191,7 @@ section:first-of-type { padding-top: 140px; }
   content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
   background: repeating-linear-gradient(
     45deg, transparent, transparent 20px,
-    rgba(184,115,51,0.02) 20px, rgba(184,115,51,0.02) 40px
+    rgba(0,71,18,0.02) 20px, rgba(0,71,18,0.02) 40px
   );
 }
 .img-placeholder .icon {
@@ -223,12 +224,12 @@ section:first-of-type { padding-top: 140px; }
 .card {
   background: var(--warm-white); border-radius: 10px;
   padding: 28px; border: 1px solid var(--light-border);
-  box-shadow: 0 2px 12px rgba(62,39,35,0.03);
+  box-shadow: 0 2px 12px rgba(0,71,18,0.04);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(62,39,35,0.07);
+  box-shadow: 0 8px 30px rgba(0,71,18,0.08);
 }
 .card-icon {
   width: 40px; height: 40px; border-radius: 10px;
@@ -272,7 +273,7 @@ section:first-of-type { padding-top: 140px; }
 .timeline::before {
   content: ''; position: absolute; left: 27px; top: 0; bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, var(--copper) 0%, rgba(184,115,51,0.15) 100%);
+  background: linear-gradient(180deg, var(--copper) 0%, rgba(0,71,18,0.15) 100%);
 }
 .timeline-item {
   display: grid; grid-template-columns: 56px 1fr;
@@ -280,11 +281,11 @@ section:first-of-type { padding-top: 140px; }
 }
 .timeline-badge {
   width: 56px; height: 56px; border-radius: 50%;
-  background: var(--walnut); color: var(--copper);
+  background: var(--walnut); color: #40E269;
   font-family: var(--font-mono); font-size: 14px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; z-index: 1;
-  border: 2px solid var(--copper);
+  border: 2px solid #40E269;
   box-shadow: 0 0 0 6px var(--cream);
 }
 .timeline-content {
@@ -351,23 +352,23 @@ section:first-of-type { padding-top: 140px; }
    CALLOUT BOXES
    ═══════════════════════════════════════ */
 .callout-warning {
-  background: rgba(200,90,58,0.05); border: 2px solid rgba(200,90,58,0.2);
+  background: rgba(180,130,20,0.06); border: 2px solid rgba(180,130,20,0.25);
   border-radius: 10px; padding: 28px 32px; margin-bottom: 40px;
 }
 .callout-warning .callout-label {
   font-family: var(--font-mono); font-size: 12px; font-weight: 700;
-  color: var(--accent-red); letter-spacing: 1px;
+  color: #8B6914; letter-spacing: 1px;
   text-transform: uppercase; margin-bottom: 10px;
 }
 .supply-note {
-  background: var(--copper-glow); border: 1px solid rgba(184,115,51,0.2);
+  background: var(--copper-glow); border: 1px solid rgba(0,71,18,0.15);
   border-radius: 8px; padding: 16px 20px; margin-top: 24px;
   display: flex; gap: 12px; align-items: flex-start;
 }
 .supply-note .pin { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
 .supply-note p {
   font-family: var(--font-mono); font-size: 12px;
-  color: #8B5E3C; line-height: 1.7; margin: 0;
+  color: #1A5C2A; line-height: 1.7; margin: 0;
 }
 
 /* ═══════════════════════════════════════
@@ -379,7 +380,7 @@ section:first-of-type { padding-top: 140px; }
 }
 .dark-panel h3 {
   font-family: var(--font-display); font-size: 30px;
-  font-weight: 700; color: var(--copper); margin-bottom: 20px;
+  font-weight: 700; color: #40E269; margin-bottom: 20px;
 }
 .dark-panel p { line-height: 1.8; }
 
@@ -400,7 +401,7 @@ section:first-of-type { padding-top: 140px; }
    ═══════════════════════════════════════ */
 .divider {
   height: 1px; border: none; margin: 56px 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(184,115,51,0.25) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(0,71,18,0.2) 50%, transparent 100%);
 }
 
 /* ═══════════════════════════════════════
@@ -408,7 +409,7 @@ section:first-of-type { padding-top: 140px; }
    ═══════════════════════════════════════ */
 .footer {
   text-align: center; padding: 64px 24px 80px;
-  background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 100%);
+  background: linear-gradient(180deg, var(--cream) 0%, #E8F0E6 100%);
 }
 .footer .overline {
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 4px;
@@ -480,7 +481,7 @@ section:first-of-type { padding-top: 140px; }
     <p class="hero-desc reveal">A hands-on professional development experience in which educators design, fabricate and assemble a desktop Bluetooth speaker — learning the full concept-to-production process across multiple tools, machines and skills.</p>
     <div class="reveal">
       <div class="img-placeholder wide">
-        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
         <div class="label">Hero — Finished Speaker</div>
         <div class="note">Photograph of the completed retro 1950s-style Bluetooth speaker. Warm wood surface, soft directional lighting. Show the speaker grille, dial, metal lettering and sticker.</div>
       </div>
@@ -560,7 +561,7 @@ section:first-of-type { padding-top: 140px; }
 </section>
 
 <!-- ═══════════════ THE BUILD ═══════════════ -->
-<section id="build" style="background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 40%, var(--cream) 100%);">
+<section id="build" style="background: linear-gradient(180deg, var(--cream) 0%, #E8F0E6 40%, var(--cream) 100%);">
   <div class="container">
     <span class="section-label reveal">Section 02</span>
     <h2 class="section-title reveal">The Build</h2>
@@ -577,7 +578,7 @@ section:first-of-type { padding-top: 140px; }
           </div>
           <p>The speaker frame is modeled parametrically in Autodesk Fusion. This stage covers sketch constraints, extrusions, fillets and preparing the model for 3D printing — including wall thickness, tolerances for component fit and orientation for print success.</p>
           <div class="img-placeholder fourthree" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Stage 01 — Fusion Model</div>
             <div class="note">Fusion screenshot: isometric view of speaker enclosure with visible sketch geometry or timeline.</div>
           </div>
@@ -594,7 +595,7 @@ section:first-of-type { padding-top: 140px; }
           </div>
           <p>All 2D components are designed in Adobe Illustrator. The wood faceplate layout (speaker grille pattern, dial cutout), the acrylic dial with engraved markings, the vinyl sticker and the "Pine Crest" vector logo for metal cutting. Each output targets a different machine and material, so stroke weights, color modes and file export settings differ.</p>
           <div class="img-placeholder fourthree" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Stage 02 — Illustrator Artboards</div>
             <div class="note">Illustrator screenshot showing vector designs for faceplate, dial and logo with visible layers panel and cut/engrave color coding.</div>
           </div>
@@ -611,7 +612,7 @@ section:first-of-type { padding-top: 140px; }
           </div>
           <p>The enclosure prints in PLA on a Prusa MK4s. Key decisions: layer height (0.2mm for speed vs. 0.15mm for finish), infill percentage (15–20% balances strength and material), support structures for overhangs and print orientation to minimize visible layer lines on the front face.</p>
           <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Stage 03 — 3D Printing</div>
             <div class="note">Photo of the frame printing on the Prusa MK4s, or a finished frame still on the print bed.</div>
           </div>
@@ -628,7 +629,7 @@ section:first-of-type { padding-top: 140px; }
           </div>
           <p>The Epilog Fusion Pro handles two components: the 1/8" wood faceplate (cut and optionally engraved with a speaker grille pattern) and the 1/8" acrylic dial (cut to shape with engraved radio-frequency markings). Power, speed and frequency settings differ between wood and acrylic. Kerf compensation matters for fit.</p>
           <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Stage 04 — Laser Cutting</div>
             <div class="note">Photo of the Epilog running a cut, or the faceplate and dial freshly cut on the laser bed.</div>
           </div>
@@ -645,7 +646,7 @@ section:first-of-type { padding-top: 140px; }
           </div>
           <p>A decorative sticker is cut on the Cricut Maker 3 from adhesive vinyl. Illustrator vectors are exported as SVG, imported into Cricut Design Space, and cut. Weeding removes excess material before transfer tape application.</p>
           <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Stage 05 — Vinyl Cutting</div>
             <div class="note">Photo of the sticker being weeded, or the finished sticker applied to the speaker.</div>
           </div>
@@ -662,7 +663,7 @@ section:first-of-type { padding-top: 140px; }
           </div>
           <p>The "Pine Crest" logo lettering is cut from 1mm stainless steel sheet on an xTool Metal Fab. This is the most specialized fabrication step and introduces educators to a technology most school makerspaces don't yet have. Small text and fine detail require careful file prep.</p>
           <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Stage 06 — Metal Cutting</div>
             <div class="note">Close-up of the stainless steel lettering on the machine bed or being installed on the speaker.</div>
           </div>
@@ -679,7 +680,7 @@ section:first-of-type { padding-top: 140px; }
           </div>
           <p>All components come together: electronics board mounted inside the 3D-printed frame, faceplate attached to the front, dial installed with the decorative button at center, metal lettering adhered, sticker applied. Bluetooth pairing is tested. The finished speaker is a functional, take-home product.</p>
           <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Stage 07 — Assembly</div>
             <div class="note">Photo sequence or exploded-view showing all components laid out before assembly, or hands assembling the speaker.</div>
           </div>
@@ -709,7 +710,7 @@ section:first-of-type { padding-top: 140px; }
         <p>Fusion handles the speaker's 3D-printed enclosure. This is parametric modeling — dimensions are driven by constraints and relationships, so changes propagate automatically. Students learning Fusion gain exposure to the same workflow used in product design and mechanical engineering.</p>
         <p><strong>Key skills introduced:</strong> Sketch constraints, extrude/revolve, fillet/chamfer, component assembly, STL export, design for additive manufacturing.</p>
         <div class="img-placeholder fourthree" style="margin-top:20px">
-          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
           <div class="label">Fusion Screenshot</div>
           <div class="note">Parametric model of the speaker enclosure — show timeline, sketch geometry or section analysis.</div>
         </div>
@@ -726,7 +727,7 @@ section:first-of-type { padding-top: 140px; }
         <p>Illustrator drives four separate outputs: the laser-cut wood faceplate, the laser-engraved acrylic dial, the Cricut-cut vinyl sticker, and the metal-cut "Pine Crest" lettering. Each requires different file-prep considerations — stroke colors for cut vs. engrave, SVG export for Cricut and DXF for the xTool.</p>
         <p><strong>Key skills introduced:</strong> Vector vs. raster, pen tool, stroke/fill for machine output, artboard management, SVG/DXF/PDF export, kerf compensation.</p>
         <div class="img-placeholder fourthree" style="margin-top:20px">
-          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
           <div class="label">Illustrator Screenshot</div>
           <div class="note">Illustrator workspace showing the faceplate, dial and logo vectors with layers panel and cut/engrave color coding.</div>
         </div>
@@ -767,7 +768,7 @@ section:first-of-type { padding-top: 140px; }
 </section>
 
 <!-- ═══════════════ EQUIPMENT ═══════════════ -->
-<section id="equipment" style="background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 40%, var(--cream) 100%);">
+<section id="equipment" style="background: linear-gradient(180deg, var(--cream) 0%, #E8F0E6 40%, var(--cream) 100%);">
   <div class="container">
     <span class="section-label reveal">Section 04</span>
     <h2 class="section-title reveal">Equipment &amp; Machines</h2>
@@ -785,7 +786,7 @@ section:first-of-type { padding-top: 140px; }
         </div>
         <div class="machine-img">
           <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Prusa MK4s</div>
             <div class="note">Photo with a print in progress or the speaker frame on the bed.</div>
           </div>
@@ -805,7 +806,7 @@ section:first-of-type { padding-top: 140px; }
         </div>
         <div class="machine-img">
           <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Epilog Fusion Pro</div>
             <div class="note">Photo of the Epilog cutting or engraving the wood faceplate or acrylic dial.</div>
           </div>
@@ -825,7 +826,7 @@ section:first-of-type { padding-top: 140px; }
         </div>
         <div class="machine-img">
           <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">Cricut Maker 3</div>
             <div class="note">Photo of the Cricut, or the vinyl sticker being weeded.</div>
           </div>
@@ -845,7 +846,7 @@ section:first-of-type { padding-top: 140px; }
         </div>
         <div class="machine-img">
           <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B87333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
             <div class="label">xTool Metal Fab</div>
             <div class="note">Photo of the xTool in operation or close-up of the metal lettering output.</div>
           </div>
@@ -932,7 +933,7 @@ section:first-of-type { padding-top: 140px; }
 </section>
 
 <!-- ═══════════════ FOR EDUCATORS ═══════════════ -->
-<section id="educators" style="background: linear-gradient(180deg, var(--cream) 0%, #EDE7DB 40%, var(--cream) 100%);">
+<section id="educators" style="background: linear-gradient(180deg, var(--cream) 0%, #E8F0E6 40%, var(--cream) 100%);">
   <div class="container">
     <span class="section-label reveal">Section 06</span>
     <h2 class="section-title reveal">For Educators</h2>
