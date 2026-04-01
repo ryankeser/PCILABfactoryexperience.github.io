@@ -213,6 +213,15 @@ section:first-of-type { padding-top: 140px; }
 .img-placeholder.wide { aspect-ratio: 21/9; }
 .img-placeholder.fourthree { aspect-ratio: 4/3; }
 
+.site-img {
+  width: 100%; border-radius: 10px;
+  object-fit: cover; display: block;
+  border: 1px solid var(--light-border);
+}
+.site-img.hero-img { aspect-ratio: 16/9; }
+.site-img.stage-img { aspect-ratio: 16/10; }
+.site-img.equip-img { aspect-ratio: 4/3; }
+
 /* ═══════════════════════════════════════
    CARDS & GRID
    ═══════════════════════════════════════ */
@@ -480,11 +489,7 @@ section:first-of-type { padding-top: 140px; }
     <h1 class="reveal">The Factory<br>Experience<em>Concept to Production, Hands On</em></h1>
     <p class="hero-desc reveal">A hands-on professional development experience in which educators design, fabricate and assemble a desktop Bluetooth speaker — learning the full concept-to-production process across multiple tools, machines and skills.</p>
     <div class="reveal">
-      <div class="img-placeholder wide">
-        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <div class="label">Hero — Finished Speaker</div>
-        <div class="note">Photograph of the completed retro 1950s-style Bluetooth speaker. Warm wood surface, soft directional lighting. Show the speaker grille, dial, metal lettering and sticker.</div>
-      </div>
+      <img src="https://drive.google.com/thumbnail?id=1gzjbVyNAmlEoWIigagFbzn39BBYBEp2H&sz=w1600" alt="Completed retro Bluetooth speaker with wood faceplate, acrylic dial, and Pine Crest metal lettering" class="site-img hero-img">
     </div>
   </div>
 </section>
@@ -577,11 +582,7 @@ section:first-of-type { padding-top: 140px; }
             <span class="tag">CAD</span><span class="tag">Parametric Design</span><span class="tag">3D Modeling</span>
           </div>
           <p>The speaker frame is modeled parametrically in Autodesk Fusion. This stage covers sketch constraints, extrusions, fillets and preparing the model for 3D printing — including wall thickness, tolerances for component fit and orientation for print success.</p>
-          <div class="img-placeholder fourthree" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">Stage 01 — Fusion Model</div>
-            <div class="note">Fusion screenshot: isometric view of speaker enclosure with visible sketch geometry or timeline.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=1O8l1z8bK2Tc3cyNMkWjgQZk5W6APvYRH&sz=w1200" alt="Autodesk Fusion render of the speaker enclosure" class="site-img stage-img" style="margin-top:20px">
         </div>
       </div>
 
@@ -611,11 +612,7 @@ section:first-of-type { padding-top: 140px; }
             <span class="tag">FDM Printing</span><span class="tag">PLA</span><span class="tag">Prusa MK4s</span>
           </div>
           <p>The enclosure prints in PLA on a Prusa MK4s. Key decisions: layer height (0.2mm for speed vs. 0.15mm for finish), infill percentage (15–20% balances strength and material), support structures for overhangs and print orientation to minimize visible layer lines on the front face.</p>
-          <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">Stage 03 — 3D Printing</div>
-            <div class="note">Photo of the frame printing on the Prusa MK4s, or a finished frame still on the print bed.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=1uaRaDiu6hiWSKmY1lzFcYFTXO7ihVjWA&sz=w1200" alt="Prusa MK4s printing speaker frames in PLA" class="site-img stage-img" style="margin-top:20px">
         </div>
       </div>
 
@@ -645,11 +642,7 @@ section:first-of-type { padding-top: 140px; }
             <span class="tag">Vinyl Cutting</span><span class="tag">Cricut</span><span class="tag">SVG</span>
           </div>
           <p>A decorative sticker is cut on the Cricut Maker 3 from adhesive vinyl. Illustrator vectors are exported as SVG, imported into Cricut Design Space, and cut. Weeding removes excess material before transfer tape application.</p>
-          <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">Stage 05 — Vinyl Cutting</div>
-            <div class="note">Photo of the sticker being weeded, or the finished sticker applied to the speaker.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=1VPO4otcdpmrTjaBbgjQ-6dn7OCML68se&sz=w1200" alt="Cricut Maker 3 cutting vinyl sticker" class="site-img stage-img" style="margin-top:20px">
         </div>
       </div>
 
@@ -662,11 +655,7 @@ section:first-of-type { padding-top: 140px; }
             <span class="tag">Metal Fab</span><span class="tag">Stainless Steel</span><span class="tag">xTool</span>
           </div>
           <p>The "Pine Crest" logo lettering is cut from 1mm stainless steel sheet on an xTool Metal Fab. This is the most specialized fabrication step and introduces educators to a technology most school makerspaces don't yet have. Small text and fine detail require careful file prep.</p>
-          <div class="img-placeholder" style="margin-top:20px">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">Stage 06 — Metal Cutting</div>
-            <div class="note">Close-up of the stainless steel lettering on the machine bed or being installed on the speaker.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=15zaHCdG27S-IBqAJhMjtpHYOjrcgPHHl&sz=w1200" alt="xTool Metal Fab cutting Pine Crest stainless steel lettering" class="site-img stage-img" style="margin-top:20px">
         </div>
       </div>
 
@@ -709,11 +698,7 @@ section:first-of-type { padding-top: 140px; }
         <h3 style="font-size:26px;margin-bottom:16px">Autodesk Fusion</h3>
         <p>Fusion handles the speaker's 3D-printed enclosure. This is parametric modeling — dimensions are driven by constraints and relationships, so changes propagate automatically. Students learning Fusion gain exposure to the same workflow used in product design and mechanical engineering.</p>
         <p><strong>Key skills introduced:</strong> Sketch constraints, extrude/revolve, fillet/chamfer, component assembly, STL export, design for additive manufacturing.</p>
-        <div class="img-placeholder fourthree" style="margin-top:20px">
-          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-          <div class="label">Fusion Screenshot</div>
-          <div class="note">Parametric model of the speaker enclosure — show timeline, sketch geometry or section analysis.</div>
-        </div>
+        <img src="https://drive.google.com/thumbnail?id=1O8l1z8bK2Tc3cyNMkWjgQZk5W6APvYRH&sz=w1200" alt="Autodesk Fusion render of speaker enclosure" class="site-img equip-img" style="margin-top:20px">
         <div class="supply-note" style="margin-top:16px">
           <span class="pin">📌</span>
           <p>Free for educators via Autodesk Education plan. Runs on Mac/Windows. Chromebook access via browser is limited.</p>
@@ -785,11 +770,7 @@ section:first-of-type { padding-top: 140px; }
           <div class="machine-classroom"><strong>Classroom notes:</strong> Excellent classroom machine. Reliable, well-documented, strong community. Auto bed leveling and input shaper reduce failed prints. PLA is low-odor and safe in ventilated rooms.</div>
         </div>
         <div class="machine-img">
-          <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">Prusa MK4s</div>
-            <div class="note">Photo with a print in progress or the speaker frame on the bed.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=1TPbxq1gEgV_38iotMzMdz6EqaWjAr1GC&sz=w1200" alt="Prusa MK4s 3D printer" class="site-img equip-img" style="width:100%">
         </div>
       </div>
     </div>
@@ -805,11 +786,7 @@ section:first-of-type { padding-top: 140px; }
           <div class="machine-classroom"><strong>Classroom notes:</strong> Professional-grade. Requires dedicated ventilation/exhaust, staff training and strict supervision. Not a casual purchase — but if your school has one, it's the most versatile tool in the shop.</div>
         </div>
         <div class="machine-img">
-          <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">Epilog Fusion Pro</div>
-            <div class="note">Photo of the Epilog cutting or engraving the wood faceplate or acrylic dial.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=1LDKtCtFN36zMlja632GBFfF470I2FGeD&sz=w1200" alt="Epilog Fusion Pro laser cutter" class="site-img equip-img" style="width:100%">
         </div>
       </div>
     </div>
@@ -825,11 +802,7 @@ section:first-of-type { padding-top: 140px; }
           <div class="machine-classroom"><strong>Classroom notes:</strong> Very accessible. Low risk, no ventilation needed, quiet. Good K–12. Cricut Design Space is browser-based. Limitation: proprietary materials can increase cost.</div>
         </div>
         <div class="machine-img">
-          <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">Cricut Maker 3</div>
-            <div class="note">Photo of the Cricut, or the vinyl sticker being weeded.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=1VPO4otcdpmrTjaBbgjQ-6dn7OCML68se&sz=w1200" alt="Cricut Maker 3 vinyl cutter" class="site-img equip-img" style="width:100%">
         </div>
       </div>
     </div>
@@ -845,11 +818,7 @@ section:first-of-type { padding-top: 140px; }
           <div class="machine-classroom"><strong>Classroom notes:</strong> Newest and most specialized machine in this build. Likely not in most school shops yet. Demonstrates where makerspace technology is headed and gives educators a preview of what's possible.</div>
         </div>
         <div class="machine-img">
-          <div class="img-placeholder fourthree" style="width:100%">
-            <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004712" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <div class="label">xTool Metal Fab</div>
-            <div class="note">Photo of the xTool in operation or close-up of the metal lettering output.</div>
-          </div>
+          <img src="https://drive.google.com/thumbnail?id=1x0hKxt7Aki2i9vHrAXHzmZm0spF6FF4q&sz=w1200" alt="xTool Metal Fab metal cutting system" class="site-img equip-img" style="width:100%">
         </div>
       </div>
     </div>
@@ -1033,6 +1002,7 @@ section:first-of-type { padding-top: 140px; }
         <div class="card-icon">🔧</div>
         <h3>Failure Is Part of Fabrication</h3>
         <p>Prototyping this speaker involved failed prints, misaligned cuts, kerf errors and parts that didn't fit. The finished product you see is the result of iteration. Show your students the failures. They're more instructive than the final version.</p>
+        <img src="https://drive.google.com/thumbnail?id=1mSI-G5reldasC7m2Ta14mVK_6Gi0RHkz&sz=w1200" alt="Speaker prototype iterations showing design progression and failures" class="site-img stage-img" style="margin-top:16px">
       </div>
       <div class="card">
         <div class="card-icon">🚪</div>
